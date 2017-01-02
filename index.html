@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Logic Gates</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#21AE86">
+</head>
+<body>
+  <!-- Header -->
+  <div id="header">
+    <h1>Logic Gates</h1>
+    <p>- Revision Site -</p>
+  </div>
+
+  <!-- Content -->
+  <div id="content">
+    <!-- Input -->
+    <div class="content-block" id="input-block">
+      <h2>Input</h2>
+      <form>
+        <p>Logic Gate:</p>
+        <select id="input-gate">
+          <option value="and">AND</option>
+          <option value="or">OR</option>
+          <option value="xor">XOR</option>
+          <option value="nand">NAND</option>
+          <option value="nor">NOR</option>
+        </select>
+
+        <p>Input A:</p>
+        <select id="input-1">
+          <option value="0">0</option>
+          <option value="1">1</option>
+        </select>
+
+        <p>Input B:</p>
+        <select id="input-2">
+          <option value="0">0</option>
+          <option value="1">1</option>
+        </select>
+      </form>
+      <button onclick="calculateOutput()">Calculate</button>
+    </div>
+
+    <!-- Output -->
+    <div class="content-block" id="output-block">
+      <h2>Output</h2>
+      <p id="output-value">--</p>
+      <p id="output-gate"></p>
+      <p id="output-input-1"></p>
+      <p id="output-input-2"></p>
+      <p id="output-instruction">Please submit input data.</p>
+      <img id="output-image">
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script type="text/javascript">
+  function calculateOutput() {
+    var gate = document.getElementById('input-gate').value;
+    var input1 = document.getElementById('input-1').value;
+    var input2 = document.getElementById('input-2').value;
+    var output = 0;
+
+    switch (gate) {
+      case 'and':
+        if (input1 === '1' && input2 === '1') output = 1;
+        break;
+      case 'or':
+        if (input1 === '1' || input2 === '1') output = 1;
+        break;
+      case 'xor':
+        if (input1 !== input2) output = 1;
+        break;
+      case 'nand':
+        if (input1 !== '1' || input2 !== '1') output = 1;
+        break;
+      case 'nor':
+        if (input1 === '0' && input2 === '0') output = 1;
+        break;
+      default:
+        break;
+    }
+
+    document.getElementById('output-instruction').innerHTML = '';
+    document.getElementById('output-value').innerHTML = output;
+    document.getElementById('output-gate').innerHTML = 'Gate: ' + gate.toUpperCase();
+    document.getElementById('output-input-1').innerHTML = 'Input A: ' + input1;
+    document.getElementById('output-input-2').innerHTML = 'Input B: ' + input2;
+    document.getElementById('output-image').src = './images/' + gate + '.png';
+  }
+  </script>
+</body>
+</html>
